@@ -1,0 +1,26 @@
+
+{% load static %}
+
+  <header class="fixed-top" id="header">
+            <div class="container d-flex align-items-center ">
+
+                <img alt="logo" class="logo me-auto"
+                     height="55" onclick="#"
+                     src="{% static 'img/logo1.png' %} "
+                     width=60">
+
+                <nav class="navbar order-last order-lg-0" id="navbar">
+                    <ul>
+                        <li><a class="nav-link scrollto " href="#">Hello Fam </a></li>
+                        <li><a class="nav-link" href="{% url 'decrypt_prescription' %}">Decrypt Prescription</a></li>
+
+                    </ul>
+                    <i class="bi bi-list mobile-nav-toggle"></i>
+                </nav>
+
+
+                <a class="appointment-btn scrollto" href="{% url 'pharmacy_logout' %}"><span
+                        class="d-none d-md-inline">Logout </span> </a>
+
+            </div>
+        </header><!-- End Header -->

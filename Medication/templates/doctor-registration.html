@@ -1,0 +1,96 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}Doctor Signup{% endblock pagetitle %}
+
+{% block body %}
+
+<section class="counts">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-primary " role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <h1 class="text-center ">Doctor Register Yourself </h1>
+    <hr>
+
+    <div class="container mt-4">
+
+
+            <form action="{% url 'doctor_signup' %}"  class="php-email-form"  method="POST">
+                {% csrf_token %}
+
+                <div class="row mt-4">
+
+                <!-- Email input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> User Name: </label>
+                        <input class="form-control" name="docname" placeholder="Doctor Name" required="required"
+                               type="text">
+                    </div>
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Doctor Degree: </label>
+                        <select class="form-select" name="docdegree" required>
+                            <option selected value="">Select Degree</option>
+                            {% for e in edu %}
+                            <option value={{e.dr_education_id}}>{{e.dr_degree}}</option>
+                            {% endfor%}
+                        </select>
+                    </div>
+                </div>
+
+                <div class="row mt-4">
+                    <!-- Mobile Number -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Mobile Number: </label>
+                        <input class="form-control" maxlength="13" name="docmobile" pattern="^(?!0+$)(\+\d{1,3})(?!0+$)\d{10}$"
+                               placeholder="+919999999999" required="required" type="tel">
+                    </div>
+
+                    <!-- email input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Email Address: </label>
+                        <input class="form-control" name="docemail" placeholder="name@example.com" required="required"
+                               type="email">
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <!-- Password input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Password: </label>
+                        <input class="form-control" name="password" placeholder="Password" required="required"
+                               type="password">
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Doctor Address : </label>
+                        <input class="form-control" name="docaddress" placeholder="Doctor Address" required="required"
+                               type="text">
+                    </div>
+                </div>
+                <div class="text-center me-2 mt-4">
+
+                    <button class="appointment-btn " type="submit">
+                        <span class="d-none d-md-inline"> </span>Submit
+                    </button>
+                    <br>
+                    <br>
+
+                    Already has account? <a href="{% url 'doctor_login' %}" style="color:green"> Login </a>
+                    {{ form.errors }}
+
+                    <hr>
+                </div>
+            </form>
+        </div>
+
+</section>
+
+{% endblock body %}

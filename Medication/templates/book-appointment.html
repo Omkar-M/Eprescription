@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}Book Appointment{% endblock pagetitle %}
+
+{% block body %}
+<section class="appointment section-bg mt-5" id="appointment">
+
+    <div class="container mt-4">
+        <form action="{% url 'book_appointment' %}" class="php-email-form" method="POST">
+            {% csrf_token %}
+            {% include 'user-navbar.html' %}
+            <center>
+                {% if messages %}
+                {% for msg in messages %}
+                <code>{{ msg }}</code>
+                {% endfor %}
+                {% endif %}
+            </center>
+            <br>
+            <div class="row mt-4">
+                <div class="col-md-6 form-group">
+                    <label for="floatingDate">Appointment Date</label>
+                    <label style="color:red;">(It must be in YYYY-MM-DD)</label>
+                    <input class="form-control" id="floatingDate" name="date" placeholder="Appointment Date" required="required"
+                           type="date">
+
+                </div>
+
+                <div class="col-md-6 form-group mt-3 mt-md-0">
+                    <label for="floatingTime">Appointment Time</label>
+                    <label style="color:red;"> (It must be in HH:MM)</label>
+                    <input class="form-control" id="floatingTime" name="time" placeholder="Appointment Time" required="required"
+                           type="time">
+                </div>
+            </div>
+
+            <div class="row mt-4">
+                <div class="col-md-6 form-group">
+                    <label style="color:black;"> Select Doctor </label>
+                    <select class="form-control bg-light" name="doctor" required>
+                        <option selected value="">Select Doctor</option>
+                        {% for dr in doctors %}
+                        <option value={{dr.dr_id}}>{{dr.dr_name}} | {{dr.dr_education.dr_degree}} | {{dr.dr_address}}
+                        </option>
+                        {% endfor%}
+                    </select>
+                    </div>
+            </div>
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary me-2 " type="Submit">Submit</button>
+                </div>
+
+        </form>
+    </div>
+    {% endblock body %}

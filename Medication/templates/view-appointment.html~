@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}View Doctor Appointment{% endblock pagetitle %}
+
+{% block body %}
+ {% include 'doctor-navbar.html' %}
+<section class="counts">
+    <div class="container p-5 my-5 border" style="backdrop-filter: blur(15px);">
+        {% if messages %}
+        <ul class="messages">
+            {% for message in messages %}
+            <div class="alert alert-primary " role="alert">
+                {{ message }}
+            </div>
+            {% endfor %}
+        </ul>
+        {% endif %}
+
+        <form action="{% url 'dr_view_appointments' %}" method="POST">
+            {% csrf_token %}
+
+
+            <table class="table table-striped">
+                <thead>
+
+                <th scope="col" style="text-align: center;">Name</th>
+                <th scope="col" style="text-align: center;">Email</th>
+                <th scope="col" style="text-align: center;">Date And Time</th>
+                <th scope="col" style="text-align: center;">Accept</th>
+                <th scope="col" style="text-align: center;">Reject</th>
+
+                </thead>
+                <tbody>
+
+                {% for pt in appointments %}
+                <tr>
+                    <th scope="row">{{pt.user_id.user_name}}</th>
+                    <td style="text-align: center;">{{pt.user_id.user_email}}</td>
+                    <td style="text-align: center;">{{pt.appointment_datetime}}</td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'DoctorAccept' %}?apmtid={{pt.id}}">
+                            <img height="40px" src="{% static 'images/correct.png' %}" width="40px">
+                        </a>
+                    </td>
+                    <td style="text-align: center;">
+                        <a href="{% url 'DoctorReject' %}?apmtid={{pt.id}}">
+                            <img height="40px" src="{% static 'images/false.jpg' %}" width="40px">
+                        </a>
+                    </td>
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+</section>
+{% endblock body %}

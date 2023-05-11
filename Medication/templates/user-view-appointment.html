@@ -1,0 +1,51 @@
+{% extends 'base.html' %}
+{% load static %}
+{% load customtags %}
+
+{% block pagetitle %}User View Appointments{% endblock pagetitle %}
+
+{% block body %}
+{% include 'user-navbar.html' %}
+<section class="counts">
+    <div class="container p-5 my-5 border" style="backdrop-filter: blur(15px);">
+
+            {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-primary " role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+        <form action="{% url 'user_view_appointment' %}" method="POST">
+            {% csrf_token %}
+
+            <table class="table table-striped">
+                <thead>
+
+                    <th scope="col" style="text-align: center;">Doctor Name</th>
+                    <th scope="col" style="text-align: center;">Date And Time</th>
+                    <th scope="col" style="text-align: center;">Status</th>
+
+                </thead>
+                <tbody>
+
+                {% for apmt in data %}
+                <tr>
+
+                    <th scope="row" style="text-align: center;">{{apmt.dr_id.dr_name}}</th>
+                    <td style="text-align: center;">{{apmt.appointment_datetime}}</td>
+                    <td style="text-align: center;">{{apmt.status|appointment_status}}</td>
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+
+        </form>
+    </div>
+</section>
+{% endblock body %}

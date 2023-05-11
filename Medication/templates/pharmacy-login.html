@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}Pharmacy Login{% endblock pagetitle %}
+
+{% block stylesheet %}
+<link href="{% static 'css/mystyle.css' %}" rel="stylesheet" type="text/css">
+{% endblock stylesheet %}
+
+{% block body %}
+
+<section class="counts" >
+     <h1 class="text-center"> Pharmacy Log-in </h1>
+    <hr>
+            {% if messages %}
+                <ul class="messages">
+                    {% for message in messages %}
+                    <div class="alert alert-primary " role="alert">
+                        {{ message }}
+                    </div>
+                    {% endfor %}
+                </ul>
+            {% endif %}
+
+    <div class="container p-4 my-5 "  >
+
+        <div class="row d-flex justify-content-center align-items-center h-100">
+
+            <div class="col-md-9 col-lg-6 col-xl-5">
+
+                <img alt="Sample image"
+                     class="img-fluid"
+                     height="50"
+                     src="{% static 'img/logo1.png' %}" width=250">
+        </div>
+            <div class="col-md-8 col-lg-6 col-xl-4  " >
+
+                <form action="{% url 'pharmacy_login' %}"  class="php-email-form"  method="POST">
+                    {% csrf_token %}
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-4">
+
+                        <label class="form-label"> Email address</label>
+                        <input class="form-control" name="email" placeholder="name@example.com" required="required"
+                               type="email">
+
+                    </div>
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label"> Password </label>
+                        <input class="form-control" name="password" placeholder="Password" required="required"
+                               type="password">
+
+                    </div>
+
+                    <div class="text-center text-lg-start mt-4 pt-2">
+                        <button class="appointment-btn " type="submit">
+                            <span class="d-none d-md-inline"> </span>Login
+                        </button>
+
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Don't have an account?
+                            <a class="link-danger" href="{% url 'pharmacy_signup' %}">Register</a>
+                        </p>
+                        <p class="small fw-bold mt-2 pt-1 mb-0">Back to home?
+                            <a class="link-danger" href="{% url 'home' %}">Home</a>
+                        </p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+</section>
+
+{% endblock body %}

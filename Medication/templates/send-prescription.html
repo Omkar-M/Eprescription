@@ -1,0 +1,49 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}Send Prescription{% endblock pagetitle %}
+
+{% block body %}
+<section class="appointment section-bg mt-5" id="appointment">
+
+    <div class="container mt-4">
+        <center>
+            {% if messages %}
+            {% for msg in messages %}
+            <code>{{ msg }}</code>
+            {% endfor %}
+            {% endif %}
+        </center>
+        <form action="{% url 'send_prescription' %}" class="php-email-form" method="POST">
+            {% csrf_token %}
+            {% include 'doctor-navbar.html' %}
+            <div class="row mt-4">
+                <div class="col-md-6 form-group mt-2">
+                    <label for="floatingName">Patient Name</label>
+                    <input class="form-control" id="floatingName" name="patientname" placeholder="Patient Name"
+                           required="required" type="text">
+
+                </div>
+
+                <div class="col-md-6 form-group mt-2">
+                    <label for="floatingEmail">Patient Email</label>
+                    <input class="form-control" id="floatingEmail" name="patientemail" placeholder="name@example.com"
+                           required="required" type="email">
+
+                </div>
+            </div>
+            <div class="row mt-4">
+                <div class="col-md-6 form-group">
+                    <label for="floatingPrescription">Prescription</label>
+                    <input class="form-control" id="floatingPrescription" name="prescription" placeholder="Prescription"
+                           required="required" type="text">
+
+                </div>
+            </div>
+            <div class="text-center mt-3">
+                <button class="btn btn-primary me-2 " type="Submit">Submit</button>
+            </div>
+        </form>
+    </div>
+</section>
+    {% endblock body %}

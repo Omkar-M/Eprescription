@@ -1,0 +1,86 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block pagetitle %}Pharmacy Signup{% endblock pagetitle %}
+
+{% block body %}
+
+
+<section class="counts">
+    {% if messages %}
+    <ul class="messages">
+        {% for message in messages %}
+        <div class="alert alert-primary " role="alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </ul>
+    {% endif %}
+
+
+    <h1 class="text-center ">Pharmacy Registration</h1>
+    <hr>
+
+    <div class="container mt-4">
+
+
+            <form action="{% url 'pharmacy_signup' %}"  class="php-email-form"  method="POST">
+                {% csrf_token %}
+
+                <div class="row mt-4">
+
+                <!-- Email input -->
+                    <div class="col-md-6 form-group">
+                        <label >Pharmacy Name</label>
+                       <input type="text" class="form-control"  placeholder="Pharmacy Name" name="pharmacyname" required="required">
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+                    <!-- Mobile Number -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label">Pharmacy Mobile Number: </label>
+                        <input type="tel" class="form-control"  placeholder="Pharmacy Mobile" name="pharmacymobile" required="required" maxlength="13">
+
+                    </div>
+
+                    <!-- email input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Pharmacy Email Address: </label>
+                         <input type="email" class="form-control" placeholder="name@example.com" name="pharmacyemail" required="required">
+
+                    </div>
+                </div>
+                <div class="row mt-4">
+                    <!-- Password input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Password: </label>
+                       <input type="password" class="form-control" placeholder="Password" name="password" required="required">
+
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="col-md-6 form-group">
+                        <label class="form-label"> Pharmacy Address : </label>
+                         <input type="text" class="form-control" placeholder="Pharmacy Address" name="pharmacyaddress" required="required">
+
+                    </div>
+                </div>
+                <div class="text-center me-2 mt-4">
+
+                    <button class="appointment-btn " type="submit">
+                        <span class="d-none d-md-inline"> </span>Submit
+                    </button>
+                    <br>
+                    <br>
+                    Already has account? <a href="{% url 'c' %}" style="color:green"> Login </a>
+                    {{ form.errors }}
+
+                    <hr>
+                </div>
+            </form>
+        </div>
+</section>
+
+{% endblock body %}

@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}Decrypt Prescription{% endblock pagetitle %}
+
+{% block body %}
+{% include 'pharmacy-navbar.html' %}
+<section class="appointment section-bg mt-5" id="appointment">
+
+    <div class="container mt-4">
+        <center>
+
+           {{ msg }}
+
+        </center>
+
+        <form action="{% url 'decrypt_prescription' %}" class="php-email-form" method="POST">
+            {% csrf_token %}
+
+            <div class="row mt-4">
+                <div class="col-md-6 form-group mt-2">
+                    <label for="floatingNumber">Prescription Number</label>
+                    <input class="form-control" id="floatingNumber" name="number" placeholder="Prescription Number"
+                           required="required" type="number">
+
+                </div>
+
+                <div class="col-md-6 form-group mt-2">
+                    <label for="floatingEmail">User email</label>
+                    <input class="form-control" id="floatingEmail" name="useremail" placeholder="name@example.com"
+                           required="required" type="email">
+
+                </div>
+
+                <div class="text-center mt-3">
+                    <button class="btn btn-primary btn-block" type="submit">Decrypt</button>
+                </div>
+            </div>
+
+        </form>
+    </div>
+    {% if prescription %}
+    <textarea cols="50" disabled name="prescription_text" rows="4">{{prescription}}</textarea>
+    {% endif %}
+
+</section>
+{% endblock body %}

@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block pagetitle %}User Signup{% endblock pagetitle %}
+
+{% block body %}
+
+<section class="counts">
+    {% if messages %}
+            <ul class="messages">
+                {% for message in messages %}
+                <div class="alert alert-primary " role="alert">
+                    {{ message }}
+                </div>
+                {% endfor %}
+            </ul>
+            {% endif %}
+
+
+        <h1 class="text-center ">User Register Yourself </h1>
+        <hr>
+        <div class="row d-flex justify-content-center align-items-center h-100">
+            <div class="col-md-9 col-lg-6 col-xl-5">
+                <img alt="Sample image"
+                     class="img-fluid"
+                     height="50"
+                     src="{% static 'img/logo1.png' %}" width=300">
+            </div>
+            <div class="col-md-8 col-lg-6 col-xl-4 offset-xl-1">
+
+                 <form action="{% url 'user_signup' %}" method="POST">
+                        {% csrf_token %}
+
+                    <!-- Email input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label"> User Name: </label>
+                        <input class="form-control" name="username" placeholder="User Name" required="required"
+                               type="text">
+                    </div>
+
+                    <!-- Mobile Number -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label"> Mobile Number: </label>
+                        <input class="form-control"  maxlength="13" name="usermobile" placeholder="User Mobile"
+                                required="required" type="tel">
+                    </div>
+
+                     <!-- email input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label"> Email Address: </label>
+                        <input class="form-control"  name="useremail" placeholder="name@example.com" required="required"
+                                type="email">
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label"> Password: </label>
+                        <input class="form-control"  name="password" placeholder="Password" required="required"
+                                type="password">
+                    </div>
+
+                    <!-- Password input -->
+                    <div class="form-outline mb-3">
+                        <label class="form-label"> Address: </label>
+                          <input class="form-control" name="useraddress" placeholder="User Address" required="required"
+                            type="text">
+                    </div>
+
+                    <div class="text-center text-lg-start mt-1 pt-1">
+
+                        <button class="appointment-btn " type="submit">
+                            <span class="d-none d-md-inline"> </span>Submit
+                        </button>
+                        <br>
+                        <hr>
+                        Already has account? <a href="{% url 'user_login' %}"> Login </a>
+                        {{ form.errors }}
+                    </div>
+                </form>
+            </div>
+        </div>
+
+</section>
+
+{% endblock body %}
